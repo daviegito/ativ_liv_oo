@@ -28,6 +28,15 @@ com interface gráfica se possível. Talvez criar um sistema de login para salva
 Talvez criar um sistema de recomendação de matérias baseado no que o aluno já cursou? Conversar com o pessoal do MinhaGrade?"""
 
 #Criar um menu para a pessoa escolher o que quer fazer
+def escolhas(escolha, tipo)
+    while True:
+        print(f'Escolha um {tipo}: ')
+
+        for opcao in escolha:
+            print('- ' + opcao)
+
+
+
 
 #Criar um dicionário com as matérias 
 
