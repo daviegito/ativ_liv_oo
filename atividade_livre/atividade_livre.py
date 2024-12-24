@@ -14,30 +14,27 @@ class Materia:
         self.creditos = creditos
         self.pre_requisito = pre_requisito #numero de materias que ela desbloqueia  
         self.status = status
-    
+
+#Dicionário com as matérias já cursadas ou que o usuário está cursando
+materias = {}
+
 """Criar menu para a pessoa colocar quais matérias já cursou, ainda vai cursar ou está cursando - implementar
 com interface gráfica se possível. Talvez criar um sistema de login para salvar as informações do aluno?
 Talvez criar um sistema de recomendação de matérias baseado no que o aluno já cursou? Conversar com o pessoal do MinhaGrade?"""
 
 #Criar um menu para a pessoa escolher o que quer fazer
 def menu():
-    print("1 - Cadastrar matérias já cursadas")
-    print("2 - Cadastrar matérias a cursar")
-    print("3 - Cadastrar matérias cursando")
-    print("4 - Sair")
+    print("1 - Cadastrar matérias cursadas ou cursando")
+    print("2 - Sair")
 
 menu()
 opcao = int(input("\nDigite a opção desejada: "))
 
-while opcao != 4:
+while opcao != 2:
     if opcao == 1:
-        print("\nQuais matérias você já cursou?")
-    elif opcao == 2:
-        print("\nQuais matérias você ainda vai cursar?")
-    elif opcao == 3:
-        print("\nQuais matérias você está cursando?")
+        print("\nQuais matérias você já cursou ou está cursando?")
     else:
-        print("\nOpção inválida. Por favor, digite um número de 1 a 4.")
+        print("\nOpção inválida. Por favor, digite 1 para cadastro ou 2 para sair do programa")
     
     print()
     menu()
