@@ -7,21 +7,13 @@ Talvez mostrar a quantidade de créditos de cada disciplina? Contabilizar pesqui
 O que deve ter em cada classe: quantidade de disciplinas que trancam, lista de disciplinas que trancam"""
 
 #Classes maiores
-"""class materias_spd: #as matérias sem pré-requisito, ou seja, que não trancam nada
-    def __init__(self):
-             
-class materias_cpd: #as matérias com pré-requisito, ou seja, que trancam outras matérias.
-    def __init__(self):
-
-#Classes menores
-class materias_cursadas: #as matérias que o aluno já cursou.
-    def __init__(self):
-
-class materias_a_cursar: #as matérias que o aluno ainda não cursou.
-    def __init__(self):
-        
-class materias_cursando: #as matérias que o aluno está cursando no presente semestre.
-    def __init__(self):"""
+class Materia: 
+    def __init__(self, nome, codigo, creditos, pre_requisito, status):
+        self.nome = nome
+        self.codigo = codigo #código da matéria
+        self.creditos = creditos
+        self.pre_requisito = pre_requisito #numero de materias que ela desbloqueia  
+        self.status = status
     
 """Criar menu para a pessoa colocar quais matérias já cursou, ainda vai cursar ou está cursando - implementar
 com interface gráfica se possível. Talvez criar um sistema de login para salvar as informações do aluno?
