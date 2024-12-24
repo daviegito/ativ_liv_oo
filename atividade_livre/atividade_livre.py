@@ -7,7 +7,7 @@ Talvez mostrar a quantidade de créditos de cada disciplina? Contabilizar pesqui
 O que deve ter em cada classe: quantidade de disciplinas que trancam, lista de disciplinas que trancam"""
 
 #Classes maiores
-class materias_spd: #as matérias sem pré-requisito, ou seja, que não trancam nada
+"""class materias_spd: #as matérias sem pré-requisito, ou seja, que não trancam nada
     def __init__(self):
              
 class materias_cpd: #as matérias com pré-requisito, ou seja, que trancam outras matérias.
@@ -21,19 +21,43 @@ class materias_a_cursar: #as matérias que o aluno ainda não cursou.
     def __init__(self):
         
 class materias_cursando: #as matérias que o aluno está cursando no presente semestre.
-    def __init__(self):
+    def __init__(self):"""
     
 """Criar menu para a pessoa colocar quais matérias já cursou, ainda vai cursar ou está cursando - implementar
 com interface gráfica se possível. Talvez criar um sistema de login para salvar as informações do aluno?
 Talvez criar um sistema de recomendação de matérias baseado no que o aluno já cursou? Conversar com o pessoal do MinhaGrade?"""
 
 #Criar um menu para a pessoa escolher o que quer fazer
-def escolhas(escolha, tipo)
-    while True:
-        print(f'Escolha um {tipo}: ')
+def menu():
+    print("1 - Cadastrar matérias já cursadas")
+    print("2 - Cadastrar matérias a cursar")
+    print("3 - Cadastrar matérias cursando")
+    print("4 - Sair")
 
-        for opcao in escolha:
-            print('- ' + opcao)
+menu()
+opcao = int(input("\nDigite a opção desejada: "))
+
+while opcao != 4:
+    if opcao == 1:
+        print("\nQuais matérias você já cursou?")
+    elif opcao == 2:
+        print("\nQuais matérias você ainda vai cursar?")
+    elif opcao == 3:
+        print("\nQuais matérias você está cursando?")
+    else:
+        print("\nOpção inválida. Por favor, digite um número de 1 a 4.")
+    
+    print()
+    menu()
+    opcao = int(input("\nDigite a opção desejada: "))
+
+print("\nPrograma encerrado")
+
+
+        
+
+        
+
 
 
 
