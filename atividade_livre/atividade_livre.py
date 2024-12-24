@@ -12,11 +12,29 @@ class Materia:
         self.nome = nome
         self.codigo = codigo #código da matéria
         self.creditos = creditos
-        self.pre_requisito = pre_requisito #numero de materias que ela desbloqueia  
-        self.status = status
+        self.pre_requisito = pre_requisito #numero de creditos de materias que ela desbloqueia  
+        self.status = status #0 para não cursada, 1 para cursada ou cursando
 
 #Dicionário com as matérias já cursadas ou que o usuário está cursando
-materias = {}
+materias = {
+    "C1": Materia("Cálculo 1", "MAT113034", 6, 22, 0),
+    #"APC": Materia("Algoritmos e Programação de Computadores", "CIC113476", 6, X, 0), 
+    "DIAC": Materia("Desenho Industrial Assistido por Computador", "FGA199176", 6, 0, 0), 
+    "EA": Materia("Engenharia e Ambiente", "FGA198005", 4, 0, 0), 
+    "IE": Materia("Introdução à Engenharia", "FGA198013", 2, 0, 0), 
+    "C2": Materia("Cálculo 2", "MAT113042", 6, 4, 0),
+    "F1": Materia("Física 1", "IFD118001", 4, 0, 0),
+    "F1E": Materia("Física 1 Experimental", "IFD118010", 2, 0, 0),
+    "IAL": Materia("Introdução à Álgebra Linear", "MAT113093", 4, 26, 0),
+    "PE": Materia("Probabilidade e Estatística Aplicada à Engenharia", "FGA195332", 4, 0, 0),
+    "MNE": Materia("Métodos Numéricos para Engenharia", "FGA195413", 4, 0, 0),
+    "EE": Materia("Engenharia Econômica", "FGA193321", 4, 8, 0),
+    "H": Materia("Humanidades e Cidadania", "FGA198021", 2, 0, 0),
+    "TED1": Materia("TED1", "FGA119482", 4, 20, 0),
+    "PED1": Materia("PED1", "FGA119466", 2, 0, 0),
+    #"OO": Materia("Orientação a Objetos", "FGA195341", 4, X, 0),
+
+}
 
 """Criar menu para a pessoa colocar quais matérias já cursou, ainda vai cursar ou está cursando - implementar
 com interface gráfica se possível. Talvez criar um sistema de login para salvar as informações do aluno?
@@ -24,7 +42,7 @@ Talvez criar um sistema de recomendação de matérias baseado no que o aluno j�
 
 #Criar um menu para a pessoa escolher o que quer fazer
 def menu():
-    print("1 - Cadastrar matérias cursadas ou cursando")
+    print("1 - Cadastrar matérias obrigatórias cursadas ou cursando")
     print("2 - Sair")
 
 menu()
@@ -32,7 +50,8 @@ opcao = int(input("\nDigite a opção desejada: "))
 
 while opcao != 2:
     if opcao == 1:
-        print("\nQuais matérias você já cursou ou está cursando?")
+        print("\nQuais matérias obrigatórias você já cursou ou está cursando?")
+        materias_cursadas_ou_cursando = input("\nQuais matérias obrigatórias você está cursando ou já cursou? (separe por vírgulas): ").split(',')
     else:
         print("\nOpção inválida. Por favor, digite 1 para cadastro ou 2 para sair do programa")
     
