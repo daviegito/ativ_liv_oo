@@ -17,22 +17,70 @@ class Materia:
 
 #Dicionário com as matérias já cursadas ou que o usuário está cursando
 materias = {
+    # 1 semestre
     "C1": Materia("Cálculo 1", "MAT113034", 6, 22, 0),
     #"APC": Materia("Algoritmos e Programação de Computadores", "CIC113476", 6, X, 0), 
     "DIAC": Materia("Desenho Industrial Assistido por Computador", "FGA199176", 6, 0, 0), 
     "EA": Materia("Engenharia e Ambiente", "FGA198005", 4, 0, 0), 
     "IE": Materia("Introdução à Engenharia", "FGA198013", 2, 0, 0), 
+
+    # 2 semestre
     "C2": Materia("Cálculo 2", "MAT113042", 6, 4, 0),
     "F1": Materia("Física 1", "IFD118001", 4, 0, 0),
     "F1E": Materia("Física 1 Experimental", "IFD118010", 2, 0, 0),
     "IAL": Materia("Introdução à Álgebra Linear", "MAT113093", 4, 26, 0),
     "PE": Materia("Probabilidade e Estatística Aplicada à Engenharia", "FGA195332", 4, 0, 0),
+    
+    # 3 semestre
     "MNE": Materia("Métodos Numéricos para Engenharia", "FGA195413", 4, 0, 0),
     "EE": Materia("Engenharia Econômica", "FGA193321", 4, 8, 0),
     "H": Materia("Humanidades e Cidadania", "FGA198021", 2, 0, 0),
     "TED1": Materia("TED1", "FGA119482", 4, 20, 0),
     "PED1": Materia("PED1", "FGA119466", 2, 0, 0),
     #"OO": Materia("Orientação a Objetos", "FGA195341", 4, X, 0),
+    #"MD1": Materia("Matemática Discreta 1", "MAT113051", 4, 6, 0), - falta o código
+    
+    # 4 semestre
+    "GPEQ": Materia("Gestão da Produção e Qualidade", "FGA201626", 4, 4, 0),
+    #"MDS": Materia("Métodos de Desenvolvimento de Software", "FGA193640", 4, 0, 0),
+    "ED": Materia("Estrutura de Dados 1", "FGA195349", 4, 20, 0),
+    "FAC": Materia("Fundamentos de Arquitetura de Computadores", "FGA193674", 4, 16, 0), 
+    #"MD2": Materia("Matemática Discreta 2", "", 4, 6, 0),
+    "PI1": Materia("Projeto Integrador de Engenharia 1", "FGA193861", 4, 6, 0),
+    
+    # 5 semestre
+    "IHC": Materia("Interação Humano Computador", "FGA201316", 4, 4, 0),
+    "RS": Materia("Requisitos de Software", "FGA201308", 4, 18, 0),
+    "SB1": Materia("Sistemas de Banco de Dados 1", "FGA193631", 4, 4, 0),
+    "FSO": Materia("Fundamentos de Sistemas Operacionais", "FGA201286", 4, 12, 0),
+    "CP1": Materia("Compiladores 1", "FGA101095", 4, 4, 0),
+    "EDA2": Materia("Estrutura de Dados 2", "FGA103209", 4, 4, 0),
+
+    # 6 semestre
+    "QS1": Materia("Qualidade de Software 1", "FGA208698", 4, 0, 0),
+    "TS": Materia("Testes de Software", "FGA206580", 4, 18, 0),
+    "ADS": Materia("Arquitetura e Desenho de Software", "FGA203882", 4, 14, 0),
+    "FRC": Materia("Fundamentos de Redes de Computadores", "FGA203912", 4, 4, 0),
+    "SB2": Materia("Sistemas de Banco de Dados 2", "FGA115576", 4, 0, 0),
+    "PAA": Materia("Projeto e Análise de Algoritmos", "CIC117536", 4, 0, 0),
+
+    # 7 semestre
+    "TPE": Materia("Técnicas de Programação em Plataformas Emergentes", "FGA206601", 4, 10, 0),
+    "PP": Materia("Paradigmas de Programação", "FGA203904", 4, 0, 0),
+    #"FSE": Materia("Fundamentos de Sistemas Embarcados", "FGA203920", 4, 6, 0),
+    "PSPD": Materia("Programação para Sistemas Paralelos e Distribuídos", "FGA206610", 4, 0, 0),
+
+    # 8 semestre
+    "EPS": Materia("Engenharia de Produto de Software", "FGA203874", 4, 6, 0),
+    "GCE": Materia("Gerência de Configuração e Evolução de Software", "FGA206598", 4, 0, 0),
+    "ES1": Materia("Estágio Supervisionado 1", "FGA102512", 14, 0, 0),
+
+    # 9 semestre
+    "PI2": Materia("Projeto Integrador de Engenharia 2", "FGA208175", 6, 0, 0),
+    "TCC1": Materia("Trabalho de Conclusão de Curso 1", "FGA101141", 4, 6, 0),
+
+    # 10 semestre
+    "TCC2": Materia("Trabalho de Conclusão de Curso 2", "FGA102415", 6, 0, 0)
 
 }
 
