@@ -19,7 +19,7 @@ class Materia:
 materias = {
     # 1 semestre
     "C1": Materia("Cálculo 1", "MAT113034", 6, 22, 0),
-    #"APC": Materia("Algoritmos e Programação de Computadores", "CIC113476", 6, X, 0), 
+    "APC": Materia("Algoritmos e Programação de Computadores", "CIC113476", 6, 74, 0), 
     "DIAC": Materia("Desenho Industrial Assistido por Computador", "FGA199176", 6, 0, 0), 
     "EA": Materia("Engenharia e Ambiente", "FGA198005", 4, 0, 0), 
     "IE": Materia("Introdução à Engenharia", "FGA198013", 2, 0, 0), 
@@ -37,15 +37,15 @@ materias = {
     "H": Materia("Humanidades e Cidadania", "FGA198021", 2, 0, 0),
     "TED1": Materia("TED1", "FGA119482", 4, 20, 0),
     "PED1": Materia("PED1", "FGA119466", 2, 0, 0),
-    #"OO": Materia("Orientação a Objetos", "FGA195341", 4, X, 0),
-    #"MD1": Materia("Matemática Discreta 1", "MAT113051", 4, 6, 0), - falta o código
+    "OO": Materia("Orientação a Objetos", "FGA195341", 4, 50, 0),
+    "MD1": Materia("Matemática Discreta 1", "FGA0085", 4, 12, 0), 
     
     # 4 semestre
     "GPEQ": Materia("Gestão da Produção e Qualidade", "FGA201626", 4, 4, 0),
-    #"MDS": Materia("Métodos de Desenvolvimento de Software", "FGA193640", 4, 0, 0),
+    "MDS": Materia("Métodos de Desenvolvimento de Software", "FGA193640", 4, 38, 0),
     "ED": Materia("Estrutura de Dados 1", "FGA195349", 4, 20, 0),
     "FAC": Materia("Fundamentos de Arquitetura de Computadores", "FGA193674", 4, 16, 0), 
-    #"MD2": Materia("Matemática Discreta 2", "", 4, 6, 0),
+    "MD2": Materia("Matemática Discreta 2", FGA0108, 4, 8, 0),
     "PI1": Materia("Projeto Integrador de Engenharia 1", "FGA193861", 4, 6, 0),
     
     # 5 semestre
@@ -67,7 +67,7 @@ materias = {
     # 7 semestre
     "TPE": Materia("Técnicas de Programação em Plataformas Emergentes", "FGA206601", 4, 10, 0),
     "PP": Materia("Paradigmas de Programação", "FGA203904", 4, 0, 0),
-    #"FSE": Materia("Fundamentos de Sistemas Embarcados", "FGA203920", 4, 6, 0),
+    "FSE": Materia("Fundamentos de Sistemas Embarcados", "FGA203920", 4, 0, 0),
     "PSPD": Materia("Programação para Sistemas Paralelos e Distribuídos", "FGA206610", 4, 0, 0),
 
     # 8 semestre
