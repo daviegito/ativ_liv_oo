@@ -87,6 +87,13 @@ materias = {
 """Criar menu para a pessoa colocar quais matérias já cursou, ainda vai cursar ou está cursando - implementar
 com interface gráfica se possível. Talvez criar um sistema de login para salvar as informações do aluno?
 Talvez criar um sistema de recomendação de matérias baseado no que o aluno já cursou? Conversar com o pessoal do MinhaGrade?"""
+def cadastrar_materias():
+    materias_cursadas_ou_cursando = input("\nQuais matérias obrigatórias você está cursando ou já cursou? (separe por vírgulas): ").split(',')
+    for materia in materias_cursadas_ou_cursando:
+        materias[materia].status = 1
+
+    print("\nMatérias cadastradas com sucesso!")
+
 
 #Criar um menu para a pessoa escolher o que quer fazer
 def menu():
