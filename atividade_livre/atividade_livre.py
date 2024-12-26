@@ -15,11 +15,23 @@ class Materia:
         self.pre_requisito = pre_requisito #numero de creditos de materias que ela desbloqueia  
         self.status = status #0 para não cursada, 1 para cursada ou cursando
 
-class Usuario:
+class Estudante:
     def __init__(self, nome, matricula, materias_em_andamento):
         self.nome = nome
         self.matricula = matricula #usar isso como parametro pra calcular qual grade trará uma formatura mais breve?
         self.materias_em_andamento = materias_em_andamento
+    
+    @classmethod    
+    def cadastrar_materias(cls, materias):
+        materias_cursadas_ou_cursando = input("\nQuais matérias obrigatórias você está cursando ou já cursou? (separe por vírgulas): ").split(',')
+        for materia in materias_cursadas_ou_cursando:
+            if materia in materias:
+                materias[materia].status = 1
+                print(f"Matéria {materia} cadastrada com sucesso!")
+            else:
+                print(f"Matéria {materia} não encontrada.")
+
+        print("\nMatérias cadastradas com sucesso!") 
 
 #Dicionário com as matérias já cursadas ou que o usuário está cursando
 materias = {
@@ -93,13 +105,6 @@ materias = {
 """Criar menu para a pessoa colocar quais matérias já cursou, ainda vai cursar ou está cursando - implementar
 com interface gráfica se possível. Talvez criar um sistema de login para salvar as informações do aluno?
 Talvez criar um sistema de recomendação de matérias baseado no que o aluno já cursou? Conversar com o pessoal do MinhaGrade?"""
-def cadastrar_materias():
-    materias_cursadas_ou_cursando = input("\nQuais matérias obrigatórias você está cursando ou já cursou? (separe por vírgulas): ").split(',')
-    for materia in materias_cursadas_ou_cursando:
-        materias[materia].status = 1
-
-    print("\nMatérias cadastradas com sucesso!")
-
 
 #Criar um menu para a pessoa escolher o que quer fazer
 def menu():
@@ -111,12 +116,10 @@ opcao = int(input("\nDigite a opção desejada: "))
 
 while opcao != 2:
     if opcao == 1:
-        print("\nQuais matérias obrigatórias você já cursou ou está cursando?")
-        materias_cursadas_ou_cursando = input("\nQuais matérias obrigatórias você está cursando ou já cursou? (separe por vírgulas): ").split(',')
+        Estudante.cadastrar_materias(materias)
     else:
         print("\nOpção inválida. Por favor, digite 1 para cadastro ou 2 para sair do programa")
     
-    print()
     menu()
     opcao = int(input("\nDigite a opção desejada: "))
 
