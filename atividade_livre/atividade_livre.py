@@ -21,17 +21,22 @@ class Estudante:
         self.matricula = matricula #usar isso como parametro pra calcular qual grade trará uma formatura mais breve?
         self.materias_em_andamento = materias_em_andamento
     
-    @classmethod    
-    def cadastrar_materias(cls, materias):
+    @classmethod
+    def cadastro_estudante(cls, materias):
+        nome_estudante = input("\nQual o seu nome? ")
+        matricula_estudante = input("\nQual a sua matrícula? ")
         materias_cursadas_ou_cursando = input("\nQuais matérias obrigatórias você está cursando ou já cursou? (separe por vírgulas): ").split(',')
+        
+        materias_em_andamento = []
         for materia in materias_cursadas_ou_cursando:
             if materia in materias:
                 materias[materia].status = 1
+                materias_em_andamento.append(materia)
                 print(f"Matéria {materia} cadastrada com sucesso!")
             else:
                 print(f"Matéria {materia} não encontrada.")
-
-        print("\nMatérias cadastradas com sucesso!") 
+        
+        return cls(nome_estudante, matricula_estudante, materias_em_andamento)
 
 #Dicionário com as matérias já cursadas ou que o usuário está cursando
 materias = {
