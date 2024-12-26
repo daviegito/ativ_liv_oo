@@ -6,7 +6,7 @@ Talvez mostrar a quantidade de créditos de cada disciplina? Contabilizar pesqui
 
 O que deve ter em cada classe: quantidade de disciplinas que trancam, lista de disciplinas que trancam"""
 
-#Classes maiores
+#Classes 
 class Materia: 
     def __init__(self, nome, codigo, creditos, pre_requisito, status):
         self.nome = nome
@@ -14,6 +14,12 @@ class Materia:
         self.creditos = creditos
         self.pre_requisito = pre_requisito #numero de creditos de materias que ela desbloqueia  
         self.status = status #0 para não cursada, 1 para cursada ou cursando
+
+class Usuario:
+    def __init__(self, nome, matricula, materias_em_andamento):
+        self.nome = nome
+        self.matricula = matricula #usar isso como parametro pra calcular qual grade trará uma formatura mais breve?
+        self.materias_em_andamento = materias_em_andamento
 
 #Dicionário com as matérias já cursadas ou que o usuário está cursando
 materias = {
