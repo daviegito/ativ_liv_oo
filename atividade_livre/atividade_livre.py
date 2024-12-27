@@ -50,6 +50,26 @@ class Estudante:
             else:
                 print(f"{materia} não foi encontrada. Tente novamente.\n")
 
+    def listar_materias_importantes(self, materias):
+        # Filtra apenas as matérias com status 0 (não cursadas)
+        materias_pendentes = [
+            materia for materia in materias.values() if materia.status == 0
+        ]
+        
+        # Ordena as matérias pendentes por número de créditos de pré-requisitos em ordem decrescente
+        top_materias = sorted(
+            materias_pendentes, key=lambda materia: materia.pre_requisito, reverse=True
+        )[:5]
+        
+        print("\nTop 5 matérias com maior quantidade de créditos de pré-requisitos:\n")
+        for materia in top_materias:
+            print(
+                f"{materia.nome} ({materia.codigo}) - Créditos de pré-requisitos: {materia.pre_requisito}\n"
+            )
+        print("As matérias acima deverão ser priorizadas na sua jornada. Boa sorte!")
+
+
+
 #Dicionário com as matérias já cursadas ou que o usuário está cursando
 materias = {
     # 1 semestre
@@ -119,17 +139,23 @@ def menu():
     print("\n*** Olá. Este é o menu de cadastro das disciplinas obrigatórias de Software da FCTE ***")
     print("1 - Cadastrar matérias obrigatórias cursadas ou cursando")
     print("2 - Listar matérias já cadastradas")
-    print("3 - Sair\n")
+    print("3 - Listar matérias mais urgentes")
+    print("4 - Sair\n")
 
 menu()
 opcao = int(input("\nDigite a opção desejada: "))
 
-while opcao != 3:
+while opcao != 4:
     if opcao == 1:
         novo_estudante = Estudante.cadastro_estudante(materias)
     elif opcao == 2:
         if novo_estudante:
             novo_estudante.listar_materias_cadastradas(materias)
+        else:
+            print("\nNenhum estudante cadastrado ainda")
+    elif opcao == 3:
+        if novo_estudante:
+            novo_estudante.listar_materias_importantes(materias)
         else:
             print("\nNenhum estudante cadastrado ainda")
     else:
@@ -141,16 +167,7 @@ while opcao != 3:
     except ValueError:
         opcao = -1
 print("\nPrograma encerrado")
-
-
-        
-
-        
-
-
-
-
-
+ 
 #Criar um dicionário com as matérias 
 
 #Criar um dicionário com as matérias que trancam outras matérias
