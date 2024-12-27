@@ -25,10 +25,12 @@ class Estudante:
     def cadastro_estudante(cls, materias):
         nome_estudante = input("\nQual o seu nome? ")
         matricula_estudante = input("\nQual a sua matrícula? ")
-        materias_cursadas_ou_cursando = input("\nQuais matérias obrigatórias você está cursando ou já cursou? (separe por vírgulas): ").split(',')
         
         materias_em_andamento = []
-        for materia in materias_cursadas_ou_cursando:
+        while True:
+            materia = input("\nDigite o código da matéria que você está cursando ou já cursou (ou digite 'sair' para finalizar): ").strip().lower()
+            if materia.lower() == 'sair:
+                break
             if materia in materias:
                 materias[materia].status = 1
                 materias_em_andamento.append(materia)
@@ -37,6 +39,14 @@ class Estudante:
                 print(f"Matéria {materia} não encontrada.\n")
         
         return cls(nome_estudante, matricula_estudante, materias_em_andamento)
+    
+    def listar_materias_cadastradas(self, materias):
+        print("\nMatérias cadastradas:\n")
+        for materia in self.materias_em_andamento:
+            if materia in materias:
+                print(f"{materia}\n")
+            else:
+                print(f"{materia} não foi encontrada. Tente novamente.\n")
 
 #Dicionário com as matérias já cursadas ou que o usuário está cursando
 materias = {
@@ -110,24 +120,33 @@ materias = {
 """Criar menu para a pessoa colocar quais matérias já cursou, ainda vai cursar ou está cursando - implementar
 com interface gráfica se possível. Talvez criar um sistema de login para salvar as informações do aluno?
 Talvez criar um sistema de recomendação de matérias baseado no que o aluno já cursou? Conversar com o pessoal do MinhaGrade?"""
+novo_estudante = None
 
 #Criar um menu para a pessoa escolher o que quer fazer
 def menu():
-    print("1 - Cadastrar matérias obrigatórias cursadas ou cursando")
-    print("2 - Sair")
+    print("\n1 - Cadastrar matérias obrigatórias cursadas ou cursando")
+    print("2 - Listar matérias já cadastradas")
+    print("3 - Sair\n")
 
 menu()
 opcao = int(input("\nDigite a opção desejada: "))
 
-while opcao != 2:
+while opcao != 3:
     if opcao == 1:
-        Estudante.cadastro_estudante(materias)
+        novo_estudante = Estudante.cadastro_estudante(materias)
+    if opcao == 2:
+        if novo_estudante:
+            novo_estudante.listar_materias_cadastradas(materias)
+        else:
+            print("\nNenhum estudante cadastrado ainda")
     else:
-        print("\nOpção inválida. Por favor, digite 1 para cadastro ou 2 para sair do programa")
+        print("\nOpção inválida. Por favor, digite 1 para cadastro, 2 para listar as matérias e 3 para saída do programa")
     
     menu()
-    opcao = int(input("\nDigite a opção desejada: "))
-
+    try:
+        opcao = int(input("\nDigite a opção desejada: "))
+    except ValueError:
+        opcao = -1
 print("\nPrograma encerrado")
 
 
