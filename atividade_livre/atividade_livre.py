@@ -32,9 +32,9 @@ class Estudante:
             if materia in materias:
                 materias[materia].status = 1
                 materias_em_andamento.append(materia)
-                print(f"Matéria {materia} cadastrada com sucesso!")
+                print(f"Matéria {materia} cadastrada com sucesso!\n")
             else:
-                print(f"Matéria {materia} não encontrada.")
+                print(f"Matéria {materia} não encontrada.\n")
         
         return cls(nome_estudante, matricula_estudante, materias_em_andamento)
 
@@ -121,7 +121,7 @@ opcao = int(input("\nDigite a opção desejada: "))
 
 while opcao != 2:
     if opcao == 1:
-        Estudante.cadastrar_materias(materias)
+        Estudante.cadastro_estudante(materias)
     else:
         print("\nOpção inválida. Por favor, digite 1 para cadastro ou 2 para sair do programa")
     
