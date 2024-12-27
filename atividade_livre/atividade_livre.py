@@ -28,13 +28,15 @@ class Estudante:
         
         materias_em_andamento = []
         while True:
-            materia = input("\nDigite o código da matéria que você está cursando ou já cursou (ou digite 'sair' para finalizar): ").strip().lower()
-            if materia.lower() == 'sair:
+            materia = input("\nDigite o código da matéria que você está cursando ou já cursou (ou digite 'sair' para finalizar): ").strip()
+            if materia.lower() == 'sair':
+                print("Saindo do cadastro...\n")
                 break
             if materia in materias:
                 materias[materia].status = 1
                 materias_em_andamento.append(materia)
-                print(f"Matéria {materia} cadastrada com sucesso!\n")
+                print(f"Matéria {materia} cadastrada com sucesso!")
+                print("Caso queira sair do cadastro, basta digitar sair\n")
             else:
                 print(f"Matéria {materia} não encontrada.\n")
         
@@ -56,14 +58,12 @@ materias = {
     "DIAC": Materia("Desenho Industrial Assistido por Computador", "FGA0168", 6, 0, 0), 
     "EA": Materia("Engenharia e Ambiente", "FGA0161", 4, 0, 0), 
     "IE": Materia("Introdução à Engenharia", "FGA0163", 2, 0, 0), 
-
     # 2 semestre
     "C2": Materia("Cálculo 2", "MAT0026", 6, 4, 0),
     "F1": Materia("Física 1", "IFD0171", 4, 0, 0),
     "F1E": Materia("Física 1 Experimental", "IFD0173", 2, 0, 0),
     "IAL": Materia("Introdução à Álgebra Linear", "MAT0031", 4, 26, 0),
     "PE": Materia("Probabilidade e Estatística Aplicada à Engenharia", "FGA0157", 4, 0, 0),
-    
     # 3 semestre
     "MNE": Materia("Métodos Numéricos para Engenharia", "FGA0160", 4, 0, 0),
     "EE": Materia("Engenharia Econômica", "FGA0133", 4, 8, 0),
@@ -72,7 +72,6 @@ materias = {
     "PED1": Materia("PED1", "FGA0071", 2, 0, 0),
     "OO": Materia("Orientação a Objetos", "FGA0158", 4, 50, 0),
     "MD1": Materia("Matemática Discreta 1", "FGA0085", 4, 12, 0), 
-    
     # 4 semestre
     "GPEQ": Materia("Gestão da Produção e Qualidade", "FGA0184", 4, 4, 0),
     "MDS": Materia("Métodos de Desenvolvimento de Software", "FGA0138", 4, 38, 0),
@@ -80,7 +79,6 @@ materias = {
     "FAC": Materia("Fundamentos de Arquitetura de Computadores", "FGA0142", 4, 16, 0), 
     "MD2": Materia("Matemática Discreta 2", "FGA0108", 4, 8, 0),
     "PI1": Materia("Projeto Integrador de Engenharia 1", "FGA0150", 4, 6, 0),
-    
     # 5 semestre
     "IHC": Materia("Interação Humano Computador", "FGA0173", 4, 4, 0),
     "RS": Materia("Requisitos de Software", "FGA0172", 4, 18, 0),
@@ -88,7 +86,6 @@ materias = {
     "FSO": Materia("Fundamentos de Sistemas Operacionais", "FGA0170", 4, 12, 0),
     "CP1": Materia("Compiladores 1", "FGA0003", 4, 4, 0),
     "EDA2": Materia("Estrutura de Dados 2", "FGA0030", 4, 4, 0),
-
     # 6 semestre
     "QS1": Materia("Qualidade de Software 1", "FGA0278", 4, 0, 0),
     "TS": Materia("Testes de Software", "FGA0238", 4, 18, 0),
@@ -96,25 +93,20 @@ materias = {
     "FRC": Materia("Fundamentos de Redes de Computadores", "FGA0211", 4, 4, 0),
     "SB2": Materia("Sistemas de Banco de Dados 2", "FGA0060", 4, 0, 0),
     "PAA": Materia("Projeto de Algoritmos", "FGA0124", 4, 0, 0), 
-
     # 7 semestre
     "TPE": Materia("Técnicas de Programação em Plataformas Emergentes", "FGA0242", 4, 10, 0),
     "PP": Materia("Paradigmas de Programação", "FGA0210", 4, 0, 0),
     "FSE": Materia("Fundamentos de Sistemas Embarcados", "FGA0109", 4, 0, 0),
     "PSPD": Materia("Programação para Sistemas Paralelos e Distribuídos", "FGA0244", 4, 0, 0),
-
     # 8 semestre
     "EPS": Materia("Engenharia de Produto de Software", "FGA0206", 4, 6, 0),
     "GCE": Materia("Gerência de Configuração e Evolução de Software", "FGA0240", 4, 0, 0),
     "ES1": Materia("Estágio Supervisionado 1", "FGA0021", 14, 0, 0),
-
     # 9 semestre
     "PI2": Materia("Projeto Integrador de Engenharia 2", "FGA0250", 6, 0, 0),
     "TCC1": Materia("Trabalho de Conclusão de Curso 1", "FGA0009", 4, 6, 0),
-
     # 10 semestre
     "TCC2": Materia("Trabalho de Conclusão de Curso 2", "FGA0011", 6, 0, 0)
-
 }
 
 """Criar menu para a pessoa colocar quais matérias já cursou, ainda vai cursar ou está cursando - implementar
@@ -124,7 +116,8 @@ novo_estudante = None
 
 #Criar um menu para a pessoa escolher o que quer fazer
 def menu():
-    print("\n1 - Cadastrar matérias obrigatórias cursadas ou cursando")
+    print("\n*** Olá. Este é o menu de cadastro das disciplinas obrigatórias de Software da FCTE ***")
+    print("1 - Cadastrar matérias obrigatórias cursadas ou cursando")
     print("2 - Listar matérias já cadastradas")
     print("3 - Sair\n")
 
@@ -134,7 +127,7 @@ opcao = int(input("\nDigite a opção desejada: "))
 while opcao != 3:
     if opcao == 1:
         novo_estudante = Estudante.cadastro_estudante(materias)
-    if opcao == 2:
+    elif opcao == 2:
         if novo_estudante:
             novo_estudante.listar_materias_cadastradas(materias)
         else:
