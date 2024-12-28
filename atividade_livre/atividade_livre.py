@@ -157,7 +157,7 @@ while opcao != 4:
     try:
         opcao = int(input("\nDigite a opção desejada: "))
     except ValueError:
-        opcao = -1
+        opcao = -1 #isto evita um problema do loop parar em uma opção e não voltar ao menu corretamente
 print("\nPrograma encerrado")
  
 
