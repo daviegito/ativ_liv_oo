@@ -1,15 +1,10 @@
 """Este projeto será sobre a criação de um programa para ajudar pessoas a otimizarem a escolha de matérias
-durante a graduação (por enquanto, só Software) levando em conta pré-requisitos e cadeias.
-
-Talvez transformar em números a quantidade de matérias que trancam outra? Mostrar a ementa de cada disciplina?
-Talvez mostrar a quantidade de créditos de cada disciplina? Contabilizar pesquisa e extensão também?
-
-O que deve ter em cada classe: quantidade de disciplinas que trancam, lista de disciplinas que trancam"""
+durante a graduação (por enquanto, só Software) levando em conta pré-requisitos e cadeias."""
 
 #Classes 
 class Materia: 
     def __init__(self, nome, codigo, creditos, pre_requisito, status):
-        self.nome = nome
+        self.nome = nome 
         self.codigo = codigo #código da matéria
         self.creditos = creditos
         self.pre_requisito = pre_requisito #numero de creditos de materias que ela desbloqueia  
@@ -29,49 +24,49 @@ class Estudante:
         materias_em_andamento = []
         while True:
             materia = input("\nDigite o código da matéria que você está cursando ou já cursou (ou digite 'sair' para finalizar): ").strip().lower()
-            if materia.lower() == 'sair':
-                print("Saindo do cadastro...")
+            if materia.lower() == 'sair': 
+                print("Saindo do cadastro...") #caso ele digite sair
                 break
             if materia in materias:
-                materias[materia].status = 1
-                materias_em_andamento.append(materia)
+                materias[materia].status = 1 #o status é mudado para indicar que está cursando ou foi cursada
+                materias_em_andamento.append(materia) #a matéria será adicionada ao materias_em_andamento, na linha 24
                 print(f"Matéria {materia} cadastrada com sucesso!")
-                print("Caso queira sair do cadastro, basta digitar sair\n")
+                print("Caso queira sair do cadastro, basta digitar sair\n") #coloquei aqui para lembrar o usuário de como sair do loop
             else:
                 print(f"Matéria {materia} não encontrada.\n")
         
-        return cls(nome_estudante, matricula_estudante, materias_em_andamento)
+        return cls(nome_estudante, matricula_estudante, materias_em_andamento) #as informações que deverão ser retornadas
     
     def listar_materias_cadastradas(self, materias):
         print("\nMatérias cadastradas:\n")
-        for materia in self.materias_em_andamento:
-            if materia in materias:
-                print(f"{materia}\n")
+        for materia in self.materias_em_andamento: #vai procurar a materia em materias_em_andamento
+            if materia in materias: 
+                print(f"{materia}\n") #se estiver lá, o nome vai aparecer
             else:
                 print(f"{materia} não foi encontrada. Tente novamente.\n")
 
-    def listar_materias_importantes(self, materias):
-        # Filtra apenas as matérias com status 0 (não cursadas)
+    def listar_materias_importantes(self, materias): #essa listagem não inclui matérias cadastradas pelo usuário (status == 1)
         materias_pendentes = [
-            materia for materia in materias.values() if materia.status == 0
+            materia for materia in materias.values() if materia.status == 0 #Ou seja, procura materias com o status 0, que não foram cursadas
         ]
         
-        # Ordena as matérias pendentes por número de créditos de pré-requisitos em ordem decrescente
+        # Ordena as matérias pendentes por número de créditos de pré-requisitos em ordem decrescente, para dar uma ênfase correta às matérias mais importantes
         top_materias = sorted(
             materias_pendentes, key=lambda materia: materia.pre_requisito, reverse=True
-        )[:5]
+        )[:5] #somente será listadas as 5 matérias mais relevantes/prioritárias para facilitar a tomada de decisão 
         
         print("\nTop 5 matérias com maior quantidade de créditos de pré-requisitos:\n")
-        for materia in top_materias:
+        for materia in top_materias: #Para cada matéria dentro das 5 encontradas acima
             print(
                 f"{materia.nome} ({materia.codigo}) - Créditos de pré-requisitos: {materia.pre_requisito}\n"
             )
-        print("As matérias acima deverão ser priorizadas na sua jornada. Boa sorte!")
+        print("As matérias acima deverão ser priorizadas na sua jornada. Boa sorte!") #Após a impressão de cada matéria, uma mensagem para o usuário
 
 
 
 #Dicionário com as matérias já cursadas ou que o usuário está cursando
 materias = {
+    #No momento, o usuário terá de digitar "c1", "apc" e afins sem as aspas.
     # 1 semestre
     "c1": Materia("Cálculo 1", "MAT0025", 6, 22, 0),
     "apc": Materia("Algoritmos e Programação de Computadores", "CIC0004", 6, 74, 0), 
@@ -129,9 +124,6 @@ materias = {
     "tcc2": Materia("Trabalho de Conclusão de Curso 2", "FGA0011", 6, 0, 0)
 }
 
-"""Criar menu para a pessoa colocar quais matérias já cursou, ainda vai cursar ou está cursando - implementar
-com interface gráfica se possível. Talvez criar um sistema de login para salvar as informações do aluno?
-Talvez criar um sistema de recomendação de matérias baseado no que o aluno já cursou? Conversar com o pessoal do MinhaGrade?"""
 novo_estudante = None
 
 #Criar um menu para a pessoa escolher o que quer fazer
@@ -147,31 +139,31 @@ opcao = int(input("\nDigite a opção desejada: "))
 
 while opcao != 4:
     if opcao == 1:
-        novo_estudante = Estudante.cadastro_estudante(materias)
+        novo_estudante = Estudante.cadastro_estudante(materias) #realiza o cadastro
     elif opcao == 2:
         if novo_estudante:
-            novo_estudante.listar_materias_cadastradas(materias)
+            novo_estudante.listar_materias_cadastradas(materias) #lista as matérias cadastradas
         else:
             print("\nNenhum estudante cadastrado ainda")
     elif opcao == 3:
         if novo_estudante:
-            novo_estudante.listar_materias_importantes(materias)
+            novo_estudante.listar_materias_importantes(materias) #lista as 5 matérias não cursadas mais prioritárias
         else:
             print("\nNenhum estudante cadastrado ainda")
     else:
         print("\nOpção inválida. Por favor, digite 1 para cadastro, 2 para listar as matérias e 3 para saída do programa")
     
-    menu()
+    menu() #caso o usuário não tenha optado por sair do sistema, continuar no loop do menu
     try:
         opcao = int(input("\nDigite a opção desejada: "))
     except ValueError:
         opcao = -1
 print("\nPrograma encerrado")
  
-#Criar um dicionário com as matérias 
 
-#Criar um dicionário com as matérias que trancam outras matérias
 
+
+#Para uso posterior, caso além das 5 matérias, ele possa citar as cadeias também - a ser avaliado ainda:
 """
 *** Matérias de Engenharia de Software ***
 Cálculo 1[3]: Cálculo 2; Probabilidade e Estatística Aplicada à Engenharia; Métodos Numéricos para Engenharia; 
