@@ -18,12 +18,14 @@ class Estudante:
     
     @classmethod
     def cadastro_estudante(cls, materias):
-        nome_estudante = input("\nQual o seu nome? ")
-        matricula_estudante = input("\nQual a sua matrícula? ")
+        nome_estudante = input("\nOlá. Qual o seu nome? ")
+        matricula_estudante = input("\nE qual a sua matrícula? ")
         
         materias_em_andamento = []
         while True:
-            materia = input("\nDigite o código da matéria que você está cursando ou já cursou (ou digite 'sair' para finalizar): ").strip().lower()
+            materia = input("\nDigite uma abreviação da matéria que você está cursando ou já cursou (ou digite 'sair' para finalizar): ").strip().lower()
+            print("\nPara realizar a abreviação, basta digitar as iniciais e desprezar a preposição")
+            print("Exemplo: Cálculo 1 vira c1; Gestão da Produção e Qualidade vira gpq;\n")
             if materia.lower() == 'sair': 
                 print("Saindo do cadastro...") #caso ele digite sair
                 break
@@ -78,17 +80,17 @@ materias = {
     "f1": Materia("Física 1", "IFD0171", 4, 0, 0),
     "f1e": Materia("Física 1 Experimental", "IFD0173", 2, 0, 0),
     "ial": Materia("Introdução à Álgebra Linear", "MAT0031", 4, 26, 0),
-    "pe": Materia("Probabilidade e Estatística Aplicada à Engenharia", "FGA0157", 4, 0, 0),
+    "peae": Materia("Probabilidade e Estatística Aplicada à Engenharia", "FGA0157", 4, 0, 0),
     # 3 semestre
     "mne": Materia("Métodos Numéricos para Engenharia", "FGA0160", 4, 0, 0),
     "ee": Materia("Engenharia Econômica", "FGA0133", 4, 8, 0),
     "hc": Materia("Humanidades e Cidadania", "FGA0164", 2, 0, 0),
-    "ted1": Materia("TED1", "FGA0073", 4, 20, 0),
-    "ped1": Materia("PED1", "FGA0071", 2, 0, 0),
+    "ted1": Materia("Teoria de Eletrônica Digital 1", "FGA0073", 4, 20, 0),
+    "ped1": Materia("Prática de Eletrônica Digital 1", "FGA0071", 2, 0, 0),
     "oo": Materia("Orientação a Objetos", "FGA0158", 4, 50, 0),
     "md1": Materia("Matemática Discreta 1", "FGA0085", 4, 12, 0), 
     # 4 semestre
-    "gpeq": Materia("Gestão da Produção e Qualidade", "FGA0184", 4, 4, 0),
+    "gpq": Materia("Gestão da Produção e Qualidade", "FGA0184", 4, 4, 0),
     "mds": Materia("Métodos de Desenvolvimento de Software", "FGA0138", 4, 38, 0),
     "ed1": Materia("Estrutura de Dados 1", "FGA0147", 4, 20, 0),
     "fac": Materia("Fundamentos de Arquitetura de Computadores", "FGA0142", 4, 16, 0), 
@@ -144,12 +146,14 @@ while opcao != 4:
         if novo_estudante:
             novo_estudante.listar_materias_cadastradas(materias) #lista as matérias cadastradas
         else:
-            print("\nNenhum estudante cadastrado ainda")
+            print("\nNenhum estudante e nem matéria cadastrados ainda")
+            print("Para cadastrar, digite 1")
     elif opcao == 3:
         if novo_estudante:
             novo_estudante.listar_materias_importantes(materias) #lista as 5 matérias não cursadas mais prioritárias
         else:
-            print("\nNenhum estudante cadastrado ainda")
+            print("\nNenhum estudante e nem matéria cadastrados ainda")
+            print("Para cadastrar, digite 1")
     else:
         print("\nOpção inválida. Por favor, digite 1 para cadastro, 2 para listar as matérias e 3 para saída do programa")
     
