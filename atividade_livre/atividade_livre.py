@@ -1,6 +1,8 @@
 """Este projeto será sobre a criação de um programa para ajudar pessoas a otimizarem a escolha de matérias
 durante a graduação (por enquanto, só Software) levando em conta pré-requisitos e cadeias."""
 
+import json
+
 #Classes 
 class Materia: 
     def __init__(self, nome, codigo, creditos, pre_requisito, status):
