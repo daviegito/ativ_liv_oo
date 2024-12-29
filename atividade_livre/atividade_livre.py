@@ -20,7 +20,6 @@ class Estudante:
     def cadastro_estudante(cls, materias):
         nome_estudante = input("\nOlá. Qual o seu nome? ")
         matricula_estudante = input("\nE qual a sua matrícula? ")
-        
         materias_em_andamento = []
         while True:
             materia = input("\nDigite uma abreviação da matéria que você está cursando ou já cursou (ou digite 'sair' para finalizar): ").strip().lower()
@@ -64,6 +63,16 @@ class Estudante:
             )
         print("As matérias acima deverão ser priorizadas na sua jornada. Boa sorte!") #Após a impressão de cada matéria, uma mensagem para o usuário
 
+    #Para serializar os objetos
+    def salvar_para_json(self, arquivo):
+        with open(arquivo, 'w') as f:
+            json.dump(self.__dict__, f)
+
+    @classmethod
+    def carregar_de_json(cls, arquivo):
+        with open(arquivo, 'r') as f:
+            dados = json.load(f)
+        return cls(**dados)
 
 
 #Dicionário com as matérias já cursadas ou que o usuário está cursando
