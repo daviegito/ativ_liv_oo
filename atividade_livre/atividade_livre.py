@@ -66,15 +66,15 @@ class Estudante:
         print("As matérias acima deverão ser priorizadas na sua jornada. Boa sorte!") #Após a impressão de cada matéria, uma mensagem para o usuário
 
     #Para serializar os objetos
-    def salvar_para_json(self, arquivo):
-        with open(arquivo, 'w') as f:
-            json.dump(self.__dict__, f)
-
-    @classmethod
-    def carregar_de_json(cls, arquivo):
-        with open(arquivo, 'r') as f:
-            dados = json.load(f)
-        return cls(**dados)
+    def salvar_para_json(self, filepath):
+        dados_estudante = {
+            'nome': self.nome,
+            'matricula': self.matricula,
+            'materias_em_andamento': self.materias_em_andamento
+        }
+        with open(filepath, 'w') as json_file:
+            json.dump(dados_estudante, json_file, indent=4)
+        print(f"Dados de {self.nome} salvos com sucesso em {filepath}")
 
 
 #Dicionário com as matérias já cursadas ou que o usuário está cursando
@@ -142,7 +142,7 @@ novo_estudante = None
 #Criar um menu para a pessoa escolher o que quer fazer
 def menu():
     print("\n*** Olá. Este é o menu de cadastro das disciplinas obrigatórias de Software da FCTE ***")
-    print("1 - Cadastrar matérias obrigatórias cursadas ou cursando")
+    print("1 - Cadastrar estudante e matérias obrigatórias cursadas ou cursando")
     print("2 - Listar matérias já cadastradas")
     print("3 - Listar matérias mais urgentes")
     print("4 - Sair\n")
@@ -153,6 +153,7 @@ opcao = int(input("\nDigite a opção desejada: "))
 while opcao != 4:
     if opcao == 1:
         novo_estudante = Estudante.cadastro_estudante(materias) #realiza o cadastro
+        novo_estudante.salvar_para_json('estudante.json') #salva os dados do cadastro em um JSON
     elif opcao == 2:
         if novo_estudante:
             novo_estudante.listar_materias_cadastradas(materias) #lista as matérias cadastradas
