@@ -13,17 +13,33 @@ class Materia:
     def nome(self):
         return self._nome
 
+    @nome.setter
+    def nome(self, value):
+        self._nome = value
+
     @property
     def codigo(self):
         return self._codigo
+
+    @codigo.setter
+    def codigo(self, value):
+        self._codigo = value
 
     @property
     def creditos(self):
         return self._creditos
 
+    @creditos.setter
+    def creditos(self, value):
+        self._creditos = value
+
     @property
     def pre_requisito(self):
         return self._pre_requisito
+
+    @pre_requisito.setter
+    def pre_requisito(self, value):
+        self._pre_requisito = value
 
     @property
     def status(self):
@@ -168,39 +184,61 @@ materias = {
 
 novo_estudante = None
 
-#Criar um menu para a pessoa escolher o que quer fazer
-def menu():
+def mostrar_menu():
     print("\n*** Olá. Este é o menu de cadastro das disciplinas obrigatórias de Software da FCTE ***")
     print("1 - Cadastrar estudante e matérias obrigatórias cursadas ou cursando")
     print("2 - Listar matérias já cadastradas")
     print("3 - Listar matérias mais urgentes")
-    print("4 - Sair\n")
+    print("4 - Acessar menu de matérias") #caso o usuário não saiba quais as matérias que têm e afins
+    print("5 - Sair\n")
 
-menu()
-opcao = int(input("\nDigite a opção desejada: "))
+def listar_materias(materias):
+    for codigo, materia in materias.items():
+        print(f"{codigo}: {materia.nome}")
 
-while opcao != 4:
-    if opcao == 1:
-        novo_estudante = Estudante.cadastro_estudante(materias) #realiza o cadastro
-        novo_estudante.salvar_para_json('estudante.json') #salva os dados do cadastro em um JSON
-    elif opcao == 2:
-        if novo_estudante:
-            novo_estudante.listar_materias_cadastradas(materias) #lista as matérias cadastradas
-        else:
-            print("\nNenhum estudante e nem matéria cadastrados ainda")
-            print("Para cadastrar, digite 1")
-    elif opcao == 3:
-        if novo_estudante:
-            novo_estudante.listar_materias_importantes(materias) #lista as 5 matérias não cursadas mais prioritárias
-        else:
-            print("\nNenhum estudante e nem matéria cadastrados ainda")
-            print("Para cadastrar, digite 1")
+def mostrar_descricao(materias):
+    codigo = input("Digite o código da matéria: ")
+    if codigo in materias:
+        print(materias[codigo].descricao())
     else:
-        print("\nOpção inválida. Por favor, digite 1 para cadastro, 2 para listar as matérias e 3 para saída do programa")
-    
-    menu() #caso o usuário não tenha optado por sair do sistema, continuar no loop do menu
-    try:
-        opcao = int(input("\nDigite a opção desejada: "))
-    except ValueError:
-        opcao = -1 #isto evita um problema do loop parar em uma opção e não voltar ao menu corretamente
-print("\nPrograma encerrado")
+        print("Matéria não encontrada.")
+
+def menu_materias():
+    while True:
+        print("\nMenu de Matérias:")
+        print("1. Listar todas as matérias")
+        print("2. Mostrar descrição de uma matéria")
+        print("3. Voltar ao menu principal\n")
+        opcao = input("Escolha uma opção: ")
+        if opcao == "1":
+            listar_materias(materias)
+        elif opcao == "2":
+            mostrar_descricao(materias)
+        elif opcao == "3":
+            break
+        else:
+            print("Opção inválida.")
+
+def main():
+    while True:
+        mostrar_menu()
+        opcao = input("Escolha uma opção: ")
+        if opcao == "1":
+            novo_estudante = Estudante.cadastro_estudante(materias) #realiza o cadastro
+            novo_estudante.salvar_para_json('estudante.json') #salva os dados do cadastro em um JSON
+        elif opcao == "2":
+            if novo_estudante:
+                novo_estudante.listar_materias_cadastradas(materias) #lista as matérias cadastradas
+            else:
+                print("\nNenhum estudante e nem matéria cadastrados ainda")
+        elif opcao == "3":
+            print("Função de listar matérias mais urgentes ainda não implementada.")
+        elif opcao == "4":
+            menu_materias()
+        elif opcao == "5":
+            break
+        else:
+            print("Opção inválida.")
+
+if __name__ == "__main__":
+    main()
