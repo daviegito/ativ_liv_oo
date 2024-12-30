@@ -73,7 +73,7 @@ class Estudante:
             print("\nPara realizar a abreviação, basta digitar as iniciais e desprezar a preposição")
             print("Exemplo: Cálculo 1 vira c1; Gestão da Produção e Qualidade vira gpq;\n")
             if materia.lower() == 'sair': 
-                print("Saindo do cadastro...") #caso ele digite sair
+                print("Saindo do cadastro...\n") #caso ele digite sair
                 break
             if materia in materias:
                 materias[materia].status = 1 #o status é mudado para indicar que está cursando ou foi cursada
@@ -213,7 +213,7 @@ def menu_materias():
         print("1. Listar todas as matérias")
         print("2. Mostrar descrição de uma matéria")
         print("3. Voltar ao menu principal\n")
-        opcao = input("Escolha uma opção: ")
+        opcao = input("Escolha uma opção de 1 a 3: ")
         if opcao == "1":
             listar_materias(materias)
         elif opcao == "2":
@@ -227,7 +227,7 @@ def menu_materias():
 def main():
     while True:
         mostrar_menu()
-        opcao = input("Escolha uma opção: ")
+        opcao = input("Escolha uma opção de 1 a 5: ")
         if opcao == "1":
             novo_estudante = Estudante.cadastro_estudante(materias) #realiza o cadastro
             novo_estudante.salvar_para_json('estudante.json') #salva os dados do cadastro em um JSON
