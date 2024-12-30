@@ -192,10 +192,12 @@ def mostrar_menu():
     print("4 - Acessar menu de matérias") #caso o usuário não saiba quais as matérias que têm e afins
     print("5 - Sair\n")
 
+#caso o usuário não saiba quais matérias que estão na lista (por exemplo, não é de Software)
 def listar_materias(materias):
     for codigo, materia in materias.items():
         print(f"{codigo}: {materia.nome}")
 
+#aqui ele vai poder acessar alguns atributos da matéria, como nome, código, créditos e pré-requisitos, se houver
 def mostrar_descricao(materias):
     codigo = input("Digite o código da matéria: ")
     if codigo in materias:
@@ -203,6 +205,8 @@ def mostrar_descricao(materias):
     else:
         print("Matéria não encontrada.")
 
+#este menu será uma das opções dentro do menu principal e ajudará o usuário sem familiaridade com as
+#disciplinas de Software
 def menu_materias():
     while True:
         print("\nMenu de Matérias:")
@@ -219,6 +223,7 @@ def menu_materias():
         else:
             print("Opção inválida.")
 
+#este é o menu principal com o cadastro e que inclui o menu_materias()
 def main():
     while True:
         mostrar_menu()
@@ -232,7 +237,10 @@ def main():
             else:
                 print("\nNenhum estudante e nem matéria cadastrados ainda")
         elif opcao == "3":
-            print("Função de listar matérias mais urgentes ainda não implementada.")
+            if novo_estudante:
+                novo_estudante.listar_materias_importantes(materias) #lista matérias mais urgentes
+            else:
+                print("\nNenhum estudante e nem matéria cadastrados ainda")
         elif opcao == "4":
             menu_materias()
         elif opcao == "5":
