@@ -155,18 +155,18 @@ class Estudante:
             print(
                 f"{materia.nome} ({materia.codigo}) - Créditos de pré-requisitos: {materia.pre_requisito}\n"
             )
-        print("As matérias acima deverão ser priorizadas na sua jornada. Boa sorte!") #Após a impressão de cada matéria, uma mensagem para o usuário
+        print("As matérias acima deverão ser priorizadas na sua jornada. Boa sorte!\n") #Após a impressão de cada matéria, uma mensagem para o usuário
 
     #Para serializar os objetos
     def salvar_para_json(self, filepath):
         dados_estudante = {
             'nome': self.nome,
             'matricula': self.matricula,
-            'materias_em_andamento': self.materias_em_andamento
+            'materias_cursadas_ou_cursando': self.materias_em_andamento
         }
         with open(filepath, 'w') as json_file:
             json.dump(dados_estudante, json_file, indent=4)
-        print(f"Dados de {self.nome} salvos com sucesso em {filepath}")
+        print(f"Dados de {self.nome} salvos com sucesso em {filepath}\n")
 
 
 #Dicionário com as matérias já cursadas ou que o usuário está cursando
@@ -229,18 +229,17 @@ materias = {
     "tcc2": MateriaSemPreRequisito("Trabalho de Conclusão de Curso 2", "FGA0011", 6, 0)
 }
 
-novo_estudante = None
-
 def mostrar_menu():
-    print("\n*** Olá. Este é o menu de cadastro das disciplinas obrigatórias de Software da FCTE ***")
+    print("*** Olá. Este é o menu de cadastro das disciplinas obrigatórias de Software da FCTE ***")
     print("1 - Cadastrar estudante e matérias obrigatórias cursadas ou cursando")
     print("2 - Listar matérias já cadastradas")
     print("3 - Listar matérias mais urgentes")
     print("4 - Acessar menu de matérias") #caso o usuário não saiba quais as matérias que têm e afins
-    print("5 - Sair\n")
+    print("5 - Sair")
 
 #caso o usuário não saiba quais matérias que estão na lista (por exemplo, não é de Software)
 def listar_materias(materias):
+    print("\nLista de todas as matérias:")
     for codigo, materia in materias.items():
         print(f"{codigo}: {materia.nome}")
 
@@ -260,7 +259,7 @@ def menu_materias():
         print("1. Listar todas as matérias")
         print("2. Mostrar descrição de uma matéria")
         print("3. Voltar ao menu principal\n")
-        opcao = input("Escolha uma opção de 1 a 3: ")
+        opcao = input("Escolha uma opção de 1 a 3 do Menu de Matérias: ")
         if opcao == "1":
             listar_materias(materias)
         elif opcao == "2":
@@ -268,13 +267,14 @@ def menu_materias():
         elif opcao == "3":
             break
         else:
-            print("Opção inválida.")
+            print("\nOpção inválida. Digite um valor de 1 a 3.")
 
 #este é o menu principal com o cadastro e que inclui o menu_materias()
 def main():
+    novo_estudante = None
     while True:
         mostrar_menu()
-        opcao = input("Escolha uma opção de 1 a 5: ")
+        opcao = input("Escolha uma opção de 1 a 5 do Menu Principal: ")
         if opcao == "1":
             novo_estudante = Estudante.cadastro_estudante(materias) #realiza o cadastro
             novo_estudante.salvar_para_json('estudante.json') #salva os dados do cadastro em um JSON
@@ -289,11 +289,17 @@ def main():
             else:
                 print("\nNenhum estudante e nem matéria cadastrados ainda")
         elif opcao == "4":
+            print("\nMenu de Matérias:")
+            print("1. Listar todas as matérias")
+            print("2. Mostrar descrição de uma matéria")
+            print("3. Voltar ao menu principal\n")
             menu_materias()
         elif opcao == "5":
+            print("\nAgradecemos a preferência pelo uso do nosso programa!")
+            print("Tenha um excelente semestre! :)")
             break
         else:
-            print("Opção inválida.")
+            print("\nOpção inválida. Digite um valor de 1 a 5.")
 
 if __name__ == "__main__":
     main() #esta função é chamada quando a condição acima é verdadeira e o script é executado diretamente.
