@@ -258,13 +258,14 @@ def menu_materias():
         print("\nMenu de Matérias:")
         print("1. Listar todas as matérias")
         print("2. Mostrar descrição de uma matéria")
-        print("3. Voltar ao menu principal\n")
+        print("3. Voltar ao menu principal")
         opcao = input("Escolha uma opção de 1 a 3 do Menu de Matérias: ")
         if opcao == "1":
             listar_materias(materias)
         elif opcao == "2":
             mostrar_descricao(materias)
         elif opcao == "3":
+            print("Voltando ao Menu Principal...\n")
             break
         else:
             print("\nOpção inválida. Digite um valor de 1 a 3.")
@@ -289,10 +290,6 @@ def main():
             else:
                 print("\nNenhum estudante e nem matéria cadastrados ainda")
         elif opcao == "4":
-            print("\nMenu de Matérias:")
-            print("1. Listar todas as matérias")
-            print("2. Mostrar descrição de uma matéria")
-            print("3. Voltar ao menu principal\n")
             menu_materias()
         elif opcao == "5":
             print("\nAgradecemos a preferência pelo uso do nosso programa!")
