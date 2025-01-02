@@ -139,7 +139,8 @@ class Estudante:
 
     def listar_materias_importantes(self, materias): #essa listagem não inclui matérias cadastradas pelo usuário (status == 1)
         materias_pendentes = [
-            materia for materia in materias.values() if materia.status == 0 #Ou seja, procura materias com o status 0, que não foram cursadas
+            materia for materia in materias.values() 
+            if materia.status == 0 and isinstance(materia, Materia)
         ]
         
         # Ordena as matérias pendentes por número de créditos de pré-requisitos em ordem decrescente, para dar uma ênfase correta às matérias mais importantes
