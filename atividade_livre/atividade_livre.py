@@ -2,6 +2,8 @@ from abc import ABC, abstractmethod
 import json
 
 #Classes 
+
+#classe abstrata
 class MateriaBase(ABC):
     @abstractmethod
     def descricao(self):
@@ -140,7 +142,7 @@ class Estudante:
     def listar_materias_importantes(self, materias): #essa listagem não inclui matérias cadastradas pelo usuário (status == 1)
         materias_pendentes = [
             materia for materia in materias.values() 
-            if materia.status == 0 and isinstance(materia, Materia)
+            if materia.status == 0 and isinstance(materia, Materia) #a matéria não pode ter sido cursada e nem ser SemPreRequisito. Afinal, não faria sentido.
         ]
         
         # Ordena as matérias pendentes por número de créditos de pré-requisitos em ordem decrescente, para dar uma ênfase correta às matérias mais importantes
@@ -294,4 +296,4 @@ def main():
             print("Opção inválida.")
 
 if __name__ == "__main__":
-    main()
+    main() #esta função é chamada quando a condição acima é verdadeira e o script é executado diretamente.
