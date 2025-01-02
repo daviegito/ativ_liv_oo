@@ -12,7 +12,7 @@
 *Relações*
 - Composições: é a construção de uma classe usando instâNcias de outras. Neste caso, Estudante usa algumas instâncias de Materia para representar as matérias em andamento.
 - Associações: relações entre 2 classes com conexão entre seus objetos, como entre as classes Estudante e Materia, em que um estudante pode estar "associado" a várias matérias diferentes.
-- Classes abstratas:
+- Classes abstratas: a classe MateriaBase é uma classe abstrata que define o método descrição.
 - Dependências: quando uma classe depende de outra para funcionar - a classe Estudante depende de Materia para representação das matérias em andamento.
 
 *Serialização de objetos*
