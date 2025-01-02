@@ -1,23 +1,22 @@
 **Sobre**
 
-- Este projeto será sobre a criação de um programa para ajudar pessoas a otimizarem a escolha de matérias
-durante a graduação (por enquanto, só Software) levando em conta os pré-requisitos. No caso deste programa, ele mostrará as 5 matérias que mais trancam outras com base naquilo que está sendo ou já foi cursado.
+- Este projeto será sobre a criação de um programa para ajudar pessoas a otimizarem a escolha de matérias durante a graduação (por enquanto, só Software) levando em conta os pré-requisitos. No caso deste programa, ele mostrará as 5 matérias que mais trancam outras com base naquilo que está sendo ou já foi cursado.
 
 **Requisitos**
 
 *Conceitos de OO*
-- Encapsulamento:
-- Herança:
-- Polimorfismo:
+- Encapsulamento: alguns dos atributos podem ser acessados via @property e .setter
+- Herança: a classe MateriaSemPreRequisito é "herdeira" da classe Materia.
+- Polimorfismo: o método descrição está presente em Materia e MateriaSemPreRequisito, mas retornam "outputs" diferentes, dado que MateriaSemPreRequisito não informa a quantidade de créditos de pré-requisitos.
 
 *Relações*
-- Composições:
-- Associações
-- Classes abstratas:
-- Dependências:
+- Composições: é a construção de uma classe usando instâNcias de outras. Neste caso, Estudante usa algumas instâncias de Materia para representar as matérias em andamento.
+- Associações: relações entre 2 classes com conexão entre seus objetos, como entre as classes Estudante e Materia, em que um estudante pode estar "associado" a várias matérias diferentes.
+- Classes abstratas: a classe MateriaBase é uma classe abstrata que define o método descrição.
+- Dependências: quando uma classe depende de outra para funcionar - a classe Estudante depende de Materia para representação das matérias em andamento.
 
 *Serialização de objetos*
-- JSON:
+- JSON: o cadastro do estudante e disciplinas cursadas fica salvo em um arquivo JSON.
 
 **Como funciona**
 
@@ -26,7 +25,8 @@ durante a graduação (por enquanto, só Software) levando em conta os pré-requ
 - Após o cadastro, os dados são salvos em um arquivo JSON chamado estudante.json, que fica guardado no mesmo lugar de onde o arquivo principal está sendo executado.
 - A 2 opção lista as matérias cadastradas anteriormente na primeira opção no formato: nome - código.
 - A 3 opção lista as 5 matérias mais relevantes para a graduação do usuário com base no que ele já cursou e na quantidade de créditos que cada matéria tranca com pré-requisitos e afins.
-- A 4 opcao encerra o programa.
+- A 4 opcao permite com que um usuário liste as matérias disponíveis ou veja uma informação específica de uma delas.
+- A 5 opcao encerra o programa.
 
 **Futuro**
 
