@@ -168,6 +168,14 @@ class Estudante:
             json.dump(dados_estudante, json_file, indent=4)
         print(f"Dados de {self.nome} salvos com sucesso em {filepath}\n")
 
+    #caso o usuário queira acessar os dados novamente
+    def carregar_de_json(self, filepath):
+        with open(filepath, 'r') as json_file:
+            dados_estudante = json.load(json_file)
+        self.nome = dados_estudante['nome']
+        self.matricula = dados_estudante['matricula']
+        self.materias_em_andamento = dados_estudante['materias_cursadas_ou_cursando']
+        print(f"\nDados de {self.nome} carregados com sucesso de {filepath}\n")
 
 #Dicionário com as matérias já cursadas ou que o usuário está cursando
 materias = {
@@ -235,7 +243,8 @@ def mostrar_menu():
     print("2 - Listar matérias já cadastradas")
     print("3 - Listar matérias mais urgentes")
     print("4 - Acessar menu de matérias") #caso o usuário não saiba quais as matérias que têm e afins
-    print("5 - Sair")
+    print("5 - Carregar dados de JSON")
+    print("6 - Sair")
 
 #caso o usuário não saiba quais matérias que estão na lista (por exemplo, não é de Software)
 def listar_materias(materias):
@@ -275,7 +284,7 @@ def main():
     novo_estudante = None
     while True:
         mostrar_menu()
-        opcao = input("Escolha uma opção de 1 a 5 do Menu Principal: ")
+        opcao = input("Escolha uma opção de 1 a 6 do Menu Principal: ")
         if opcao == "1":
             novo_estudante = Estudante.cadastro_estudante(materias) #realiza o cadastro
             novo_estudante.salvar_para_json('estudante.json') #salva os dados do cadastro em um JSON
@@ -292,6 +301,13 @@ def main():
         elif opcao == "4":
             menu_materias()
         elif opcao == "5":
+            filepath = input("Digite o caminho do arquivo para carregar os dados: ")
+            if novo_estudante:
+                novo_estudante.carregar_de_json(filepath)
+            else:
+                novo_estudante = Estudante("", "", [])
+                novo_estudante.carregar_de_json(filepath)
+        elif opcao == "6":
             print("\nAgradecemos a preferência pelo uso do nosso programa!")
             print("Tenha um excelente semestre! :)")
             break
