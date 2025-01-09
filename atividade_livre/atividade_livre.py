@@ -241,9 +241,9 @@ def mostrar_menu():
     print("*** Olá. Este é o menu de cadastro das disciplinas obrigatórias de Software da FCTE ***")
     print("1 - Cadastrar estudante e matérias obrigatórias cursadas ou cursando")
     print("2 - Listar matérias já cadastradas")
-    print("3 - Listar matérias mais urgentes")
-    print("4 - Acessar menu de matérias") #caso o usuário não saiba quais as matérias que têm e afins
-    print("5 - Carregar dados de JSON")
+    print("3 - Carregar dados de JSON")
+    print("4 - Listar matérias mais urgentes") #caso o usuário não saiba quais as matérias que têm e afins
+    print("5 - Acessar menu de matérias")
     print("6 - Sair")
 
 #caso o usuário não saiba quais matérias que estão na lista (por exemplo, não é de Software)
@@ -294,19 +294,22 @@ def main():
             else:
                 print("\nNenhum estudante e nem matéria cadastrados ainda")
         elif opcao == "3":
-            if novo_estudante:
-                novo_estudante.listar_materias_importantes(materias) #lista matérias mais urgentes
-            else:
-                print("\nNenhum estudante e nem matéria cadastrados ainda")
-        elif opcao == "4":
-            menu_materias()
-        elif opcao == "5":
             filepath = input("Digite o caminho do arquivo para carregar os dados: ")
             if novo_estudante:
                 novo_estudante.carregar_de_json(filepath)
             else:
-                novo_estudante = Estudante("", "", [])
-                novo_estudante.carregar_de_json(filepath)
+                try:
+                    novo_estudante = Estudante("", "", [])
+                    novo_estudante.carregar_de_json(filepath)
+                except FileNotFoundError:
+                    print("\nO arquivo não pôde ser acessado! Verifique o diretório novamente!\n")
+        elif opcao == "4":
+            if novo_estudante:
+                novo_estudante.listar_materias_importantes(materias) #lista matérias mais urgentes
+            else:
+                print("\nNenhum estudante e nem matéria cadastrados ainda")
+        elif opcao == "5":
+            menu_materias()
         elif opcao == "6":
             print("\nAgradecemos a preferência pelo uso do nosso programa!")
             print("Tenha um excelente semestre! :)")
