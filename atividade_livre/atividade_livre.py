@@ -17,11 +17,11 @@ class Materia(MateriaBase):
         self.pre_requisito = pre_requisito #numero de creditos de materias que ela desbloqueia  
         self.status = status #0 para não cursada, 1 para cursada ou cursando
     
-    @property
+    @property #aqui ocorre o encapsulamento dos atributos
     def nome(self):
         return self._nome
 
-    @nome.setter
+    @nome.setter #o setter também ajuda no encapsulamento
     def nome(self, value):
         self._nome = value
 
@@ -68,7 +68,7 @@ class MateriaSemPreRequisito(MateriaBase):
         self.creditos = creditos
         self.status = status
 
-    @property
+    @property #encapsulamento novamente :)
     def nome(self):
         return self._nome
 
@@ -100,6 +100,7 @@ class MateriaSemPreRequisito(MateriaBase):
     def status(self, value):
         self._status = value
 
+    #isso serve para o menu de matérias - quando um usuário quiser verificar alguma matéria individual
     def descricao(self):
         return f"{self.nome} ({self.codigo}) - Créditos: {self.creditos}, Sem pré-requisitos"
 
@@ -109,11 +110,14 @@ class Estudante:
         self.matricula = matricula #usar isso como parametro pra calcular qual grade trará uma formatura mais breve?
         self.materias_em_andamento = materias_em_andamento
     
+    #implementação de método para a classe estudante
     @classmethod
+    #isso serve para realização do cadastro, opção 1 do menu principal
     def cadastro_estudante(cls, materias):
         nome_estudante = input("\nOlá. Qual o seu nome? ")
         matricula_estudante = input("\nE qual a sua matrícula? ")
         materias_em_andamento = []
+        #Esse Loop serve para o usuário conseguir digitar mais de 1 matéria ao invés de ter de retornar toda vez ao menu
         while True:
             materia = input("\nDigite uma abreviação da matéria que você está cursando ou já cursou (ou digite 'sair' para finalizar): ").strip().lower()
             print("\nPara realizar a abreviação, basta digitar as iniciais e desprezar a preposição")
@@ -237,6 +241,7 @@ materias = {
     "tcc2": MateriaSemPreRequisito("Trabalho de Conclusão de Curso 2", "FGA0011", 6, 0)
 }
 
+#para a função main não ficar muito grande e verborrágica
 def mostrar_menu():
     print("*** Olá. Este é o menu de cadastro das disciplinas obrigatórias de Software da FCTE ***")
     print("1 - Cadastrar estudante e matérias obrigatórias cursadas ou cursando")
@@ -295,13 +300,17 @@ def main():
                 print("\nNenhum estudante e nem matéria cadastrados ainda")
         elif opcao == "3":
             filepath = input("Digite o caminho do arquivo para carregar os dados: ")
+            #se tiver um novo estudante
             if novo_estudante:
+                #as informações serão carregadas do arquivo json
                 novo_estudante.carregar_de_json(filepath)
             else:
                 try:
+                    #aqui há a criação de um novo estudante com as informações vazias
                     novo_estudante = Estudante("", "", [])
+                    #as informações são carregadas do arquivo
                     novo_estudante.carregar_de_json(filepath)
-                except FileNotFoundError:
+                except FileNotFoundError: #caso o arquivo não seja encontrado
                     print("\nO arquivo não pôde ser acessado! Verifique o diretório novamente!\n")
         elif opcao == "4":
             if novo_estudante:
