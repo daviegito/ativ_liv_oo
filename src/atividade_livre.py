@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 import json
 
-#Classes 
+#Classes
 
 #classe abstrata
 class MateriaBase(ABC):
@@ -9,14 +9,14 @@ class MateriaBase(ABC):
     def descricao(self):
         pass
 
-class Materia(MateriaBase): 
+class Materia(MateriaBase):
     def __init__(self, nome, codigo, creditos, pre_requisito, status):
-        self.nome = nome 
+        self.nome = nome
         self.codigo = codigo #código da matéria
         self.creditos = creditos
-        self.pre_requisito = pre_requisito #numero de creditos de materias que ela desbloqueia  
+        self.pre_requisito = pre_requisito #numero de creditos de materias que ela desbloqueia
         self.status = status #0 para não cursada, 1 para cursada ou cursando
-    
+
     @property #aqui ocorre o encapsulamento dos atributos
     def nome(self):
         return self._nome
@@ -56,14 +56,14 @@ class Materia(MateriaBase):
     @status.setter
     def status(self, value):
         self._status = value
-    
+
     def descricao(self):
         return f"{self.nome} ({self.codigo}) - Créditos: {self.creditos}, Pré-requisitos: {self.pre_requisito}"
 
 #Para matérias que não trancam outras
 class MateriaSemPreRequisito(MateriaBase):
     def __init__(self, nome, codigo, creditos, status):
-        self.nome = nome 
+        self.nome = nome
         self.codigo = codigo
         self.creditos = creditos
         self.status = status
@@ -91,7 +91,7 @@ class MateriaSemPreRequisito(MateriaBase):
     @creditos.setter
     def creditos(self, value):
         self._creditos = value
-    
+
     @property
     def status(self):
         return self._status
@@ -109,8 +109,7 @@ class Estudante:
         self.nome = nome
         self.matricula = matricula #usar isso como parametro pra calcular qual grade trará uma formatura mais breve?
         self.materias_em_andamento = materias_em_andamento
-    
-    #implementação de método para a classe estudante
+
     @classmethod
     #isso serve para realização do cadastro, opção 1 do menu principal
     def cadastro_estudante(cls, materias):
@@ -122,46 +121,45 @@ class Estudante:
             materia = input("\nDigite uma abreviação da matéria que você está cursando ou já cursou (ou digite 'sair' para finalizar): ").strip().lower()
             print("\nPara realizar a abreviação, basta digitar as iniciais e desprezar a preposição")
             print("Exemplo: Cálculo 1 vira c1; Gestão da Produção e Qualidade vira gpq;\n")
-            if materia.lower() == 'sair': 
-                print("Saindo do cadastro...\n") #caso ele digite sair
+            if materia.lower() == 'sair':
+                print("Saindo do cadastro...\n")
                 break
             if materia in materias:
                 materias[materia].status = 1 #o status é mudado para indicar que está cursando ou foi cursada
-                materias_em_andamento.append(materia) #a matéria será adicionada ao materias_em_andamento, na linha 24
+                materias_em_andamento.append(materia)
                 print(f"Matéria {materia} cadastrada com sucesso!")
-                print("Caso queira sair do cadastro, basta digitar sair\n") #coloquei aqui para lembrar o usuário de como sair do loop
+                print("Caso queira sair do cadastro, basta digitar sair\n")
             else:
                 print(f"Matéria {materia} não encontrada.\n")
-        
-        return cls(nome_estudante, matricula_estudante, materias_em_andamento) #as informações que deverão ser retornadas
-    
+
+        return cls(nome_estudante, matricula_estudante, materias_em_andamento)
+
     def listar_materias_cadastradas(self, materias):
         print("\nMatérias cadastradas:\n")
-        for materia in self.materias_em_andamento: #vai procurar a materia em materias_em_andamento
-            if materia in materias: 
-                print(f"{materia}\n") #se estiver lá, o nome vai aparecer
+        for materia in self.materias_em_andamento:
+            if materia in materias:
+                print(f"{materia}\n")
             else:
                 print(f"{materia} não foi encontrada. Tente novamente.\n")
 
     def listar_materias_importantes(self, materias): #essa listagem não inclui matérias cadastradas pelo usuário (status == 1)
         materias_pendentes = [
-            materia for materia in materias.values() 
-            if materia.status == 0 and isinstance(materia, Materia) #a matéria não pode ter sido cursada e nem ser SemPreRequisito. Afinal, não faria sentido.
+            materia for materia in materias.values()
+            if materia.status == 0 and isinstance(materia, Materia)
         ]
-        
+
         # Ordena as matérias pendentes por número de créditos de pré-requisitos em ordem decrescente, para dar uma ênfase correta às matérias mais importantes
         top_materias = sorted(
             materias_pendentes, key=lambda materia: materia.pre_requisito, reverse=True
-        )[:5] #somente será listadas as 5 matérias mais relevantes/prioritárias para facilitar a tomada de decisão 
-        
+        )[:5]
+
         print("\nTop 5 matérias com maior quantidade de créditos de pré-requisitos:\n")
         for materia in top_materias: #Para cada matéria dentro das 5 encontradas acima
             print(
                 f"{materia.nome} ({materia.codigo}) - Créditos de pré-requisitos: {materia.pre_requisito}\n"
             )
-        print("As matérias acima deverão ser priorizadas na sua jornada. Boa sorte!\n") #Após a impressão de cada matéria, uma mensagem para o usuário
+        print("As matérias acima deverão ser priorizadas na sua jornada. Boa sorte!\n")
 
-    #Para serializar os objetos
     def salvar_para_json(self, filepath):
         dados_estudante = {
             'nome': self.nome,
@@ -172,7 +170,6 @@ class Estudante:
             json.dump(dados_estudante, json_file, indent=4)
         print(f"Dados de {self.nome} salvos com sucesso em {filepath}\n")
 
-    #caso o usuário queira acessar os dados novamente
     def carregar_de_json(self, filepath):
         with open(filepath, 'r') as json_file:
             dados_estudante = json.load(json_file)
@@ -181,15 +178,14 @@ class Estudante:
         self.materias_em_andamento = dados_estudante['materias_cursadas_ou_cursando']
         print(f"\nDados de {self.nome} carregados com sucesso de {filepath}\n")
 
-#Dicionário com as matérias já cursadas ou que o usuário está cursando
 materias = {
     #No momento, o usuário terá de digitar "c1", "apc" e afins sem as aspas.
     # 1 semestre
     "c1": Materia("Cálculo 1", "MAT0025", 6, 22, 0),
-    "apc": Materia("Algoritmos e Programação de Computadores", "CIC0004", 6, 74, 0), 
-    "diac": MateriaSemPreRequisito("Desenho Industrial Assistido por Computador", "FGA0168", 6, 0), 
-    "ea": MateriaSemPreRequisito("Engenharia e Ambiente", "FGA0161", 4, 0), 
-    "ie": MateriaSemPreRequisito("Introdução à Engenharia", "FGA0163", 2, 0), 
+    "apc": Materia("Algoritmos e Programação de Computadores", "CIC0004", 6, 74, 0),
+    "diac": MateriaSemPreRequisito("Desenho Industrial Assistido por Computador", "FGA0168", 6, 0),
+    "ea": MateriaSemPreRequisito("Engenharia e Ambiente", "FGA0161", 4, 0),
+    "ie": MateriaSemPreRequisito("Introdução à Engenharia", "FGA0163", 2, 0),
     # 2 semestre
     "c2": Materia("Cálculo 2", "MAT0026", 6, 4, 0),
     "f1": MateriaSemPreRequisito("Física 1", "IFD0171", 4, 0),
@@ -203,12 +199,12 @@ materias = {
     "ted1": Materia("Teoria de Eletrônica Digital 1", "FGA0073", 4, 20, 0),
     "ped1": MateriaSemPreRequisito("Prática de Eletrônica Digital 1", "FGA0071", 2, 0),
     "oo": Materia("Orientação a Objetos", "FGA0158", 4, 50, 0),
-    "md1": Materia("Matemática Discreta 1", "FGA0085", 4, 12, 0), 
+    "md1": Materia("Matemática Discreta 1", "FGA0085", 4, 12, 0),
     # 4 semestre
     "gpq": Materia("Gestão da Produção e Qualidade", "FGA0184", 4, 4, 0),
     "mds": Materia("Métodos de Desenvolvimento de Software", "FGA0138", 4, 38, 0),
     "ed1": Materia("Estrutura de Dados 1", "FGA0147", 4, 20, 0),
-    "fac": Materia("Fundamentos de Arquitetura de Computadores", "FGA0142", 4, 16, 0), 
+    "fac": Materia("Fundamentos de Arquitetura de Computadores", "FGA0142", 4, 16, 0),
     "md2": Materia("Matemática Discreta 2", "FGA0108", 4, 8, 0),
     "pi1": Materia("Projeto Integrador de Engenharia 1", "FGA0150", 4, 6, 0),
     # 5 semestre
@@ -224,7 +220,7 @@ materias = {
     "ads": Materia("Arquitetura e Desenho de Software", "FGA0208", 4, 14, 0),
     "frc": Materia("Fundamentos de Redes de Computadores", "FGA0211", 4, 4, 0),
     "sb2": MateriaSemPreRequisito("Sistemas de Banco de Dados 2", "FGA0060", 4, 0),
-    "paa": MateriaSemPreRequisito("Projeto de Algoritmos", "FGA0124", 4, 0), 
+    "paa": MateriaSemPreRequisito("Projeto de Algoritmos", "FGA0124", 4, 0),
     # 7 semestre
     "tpe": Materia("Técnicas de Programação em Plataformas Emergentes", "FGA0242", 4, 10, 0),
     "pp": MateriaSemPreRequisito("Paradigmas de Programação", "FGA0210", 4, 0),
@@ -241,23 +237,20 @@ materias = {
     "tcc2": MateriaSemPreRequisito("Trabalho de Conclusão de Curso 2", "FGA0011", 6, 0)
 }
 
-#para a função main não ficar muito grande e verborrágica
 def mostrar_menu():
     print("*** Olá. Este é o menu de cadastro das disciplinas obrigatórias de Software da FCTE ***")
     print("1 - Cadastrar estudante e matérias obrigatórias cursadas ou cursando")
     print("2 - Listar matérias já cadastradas")
     print("3 - Carregar dados de JSON")
-    print("4 - Listar matérias mais urgentes") #caso o usuário não saiba quais as matérias que têm e afins
+    print("4 - Listar matérias mais urgentes")
     print("5 - Acessar menu de matérias")
     print("6 - Sair")
 
-#caso o usuário não saiba quais matérias que estão na lista (por exemplo, não é de Software)
 def listar_materias(materias):
     print("\nLista de todas as matérias:")
     for codigo, materia in materias.items():
         print(f"{codigo}: {materia.nome}")
 
-#aqui ele vai poder acessar alguns atributos da matéria, como nome, código, créditos e pré-requisitos, se houver
 def mostrar_descricao(materias):
     codigo = input("Digite o código da matéria: ")
     if codigo in materias:
@@ -291,18 +284,17 @@ def main():
         mostrar_menu()
         opcao = input("Escolha uma opção de 1 a 6 do Menu Principal: ")
         if opcao == "1":
-            novo_estudante = Estudante.cadastro_estudante(materias) #realiza o cadastro
-            novo_estudante.salvar_para_json('estudante.json') #salva os dados do cadastro em um JSON
+            novo_estudante = Estudante.cadastro_estudante(materias)
+            novo_estudante.salvar_para_json('estudante.json')
         elif opcao == "2":
             if novo_estudante:
-                novo_estudante.listar_materias_cadastradas(materias) #lista as matérias cadastradas
+                novo_estudante.listar_materias_cadastradas(materias)
             else:
                 print("\nNenhum estudante e nem matéria cadastrados ainda")
         elif opcao == "3":
             filepath = input("Digite o caminho do arquivo para carregar os dados: ")
             #se tiver um novo estudante
             if novo_estudante:
-                #as informações serão carregadas do arquivo json
                 novo_estudante.carregar_de_json(filepath)
             else:
                 try:
@@ -310,7 +302,7 @@ def main():
                     novo_estudante = Estudante("", "", [])
                     #as informações são carregadas do arquivo
                     novo_estudante.carregar_de_json(filepath)
-                except FileNotFoundError: #caso o arquivo não seja encontrado
+                except FileNotFoundError:
                     print("\nO arquivo não pôde ser acessado! Verifique o diretório novamente!\n")
         elif opcao == "4":
             if novo_estudante:
