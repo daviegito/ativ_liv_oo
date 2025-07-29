@@ -1,6 +1,6 @@
 #Testes para a classe estudante
 import pytest
-from atividade_livre import Estudante
+from src.atividade_livre import Estudante
 
 def test_estudante_sucesso():
   estudante = Estudante("Davi", "200000000", "c1")
